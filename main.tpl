@@ -10,35 +10,39 @@
 <body>
 
 <div class="container">
+    <?php foreach ($comments as $comment) { ?>
     <div class="comment">
-        <span class="name">Иван Петров</span>&emsp;<span class="email">ivan.petrov@mail.ru</span><br/>
-        <span class="time">19.06.2016 18:41</span>
+        <span class="name"><?php echo($comment['name']); ?></span>&emsp;<span class="email"><?php echo($comment['email']); ?></span><br/>
+        <span class="time"><?php echo(date('d.m.Y H:i:s', $comment['timestamp'])); ?></span><br/>
+        <?php
+            if ($comment['image']) {
+                echo('<img src="'. $fileDir . $comment['image'] .'" /><br/>');
+            }
+        ?>
         <div class="message">
-            Многострочное<br/>
-            очень<br/>
-            длинное<br/>
-            сообщение
+            <?php echo($comment['text']); ?>
         </div>
     </div>
+    <?php } ?>
 </div>
 
 <div class="container review">
-    <form method="POST" enctype="multipart/form-data" class="form feedback" role="form" data-toggle="validator">
+    <form method="POST" action="./" enctype="multipart/form-data" class="form feedback" role="form" data-toggle="validator">
         <div class="form-group">
             <label class="control-label" for="name">Имя</label>
-            <input type="text" class="form-control" id="name" required />
+            <input type="text" class="form-control" id="name" name="name" required />
         </div>
         <div class="form-group">
             <label class="control-label" for="email">Email</label>
-            <input type="email" class="form-control" id="email" required />
+            <input type="email" class="form-control" id="email" name="email" required />
         </div>
         <div class="form-group">
             <label class="control-label" for="text">Сообщение</label>
-            <textarea class="form-control" id="text" required ></textarea>
+            <textarea class="form-control" id="text" name="text" required ></textarea>
         </div>
         <div class="form-group">
             <label class="control-label" for="file">Изображение</label>
-            <input type="file" class="form-control" id="file" accept="image/*" />
+            <input type="file" class="form-control" id="file" name="file" accept="image/*" />
             <div class="help-block with-errors">Допустимые форматы: JPG, GIF, PNG</div>
         </div>
         <div class="form-group">
@@ -56,24 +60,28 @@
 <script src="https://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 <script type="text/javascript">
     imgUrl = '';
+    shouldPostForm = true;
 
     $('input#file').change(function(e) {
         imgUrl = URL.createObjectURL(e.target.files[0]);
     });
 
     $('form').validator().on('submit', function (e) {
-        if (!e.isDefaultPrevented()) {
+        if (!e.isDefaultPrevented() && !shouldPostForm) {
             e.preventDefault();
         }
+        shouldPostForm = true;
     });
 
-    $('button#preview').click(function() {
+    $('button#preview').click(function(e) {
+        shouldPostForm = false;
         var div = $('div#view');
         div.empty();
         if (!$(this).hasClass('disabled')) {
+            var d = new Date();
             var html = '<div class="comment">';
             html += '<span class="name">' + $('input#name').val() + '</span>&emsp;<span class="email">' + $('input#email').val() + '</span><br/>';
-            html += '<span class="time">' + (new Date()).toLocaleDateString() + '</span><br/>';
+            html += '<span class="time">' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString() + '</span><br/>';
             if (imgUrl) html += '<img src="' + imgUrl + '" /><br/>';
             html += '<div class="message">' + $('textarea#text').val().replace(/\n/g, '<br/>') + '</div>';
             html += '</div>';
