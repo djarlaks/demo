@@ -9,6 +9,14 @@
 </head>
 <body>
 
+<div class="container sort">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default" sort="date">По дате&emsp;<span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span><span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-default" sort="name">По имени&emsp;<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span><span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-default" sort="email">По email&emsp;<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span><span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span></button>
+    </div>
+</div>
+
 <div class="container">
     <?php foreach ($comments as $comment) { ?>
     <div class="comment">
@@ -73,7 +81,7 @@
         shouldPostForm = true;
     });
 
-    $('button#preview').click(function(e) {
+    $('button#preview').click(function() {
         shouldPostForm = false;
         var div = $('div#view');
         div.empty();
@@ -88,6 +96,19 @@
             div.html(html);
         }
     });
+
+    $('div.sort button').click(function() {
+        var btn = $(this);
+        var sort = btn.attr('sort');
+        location.href = location.origin + '/?sort=' + $(this).attr('sort') + ((btn.attr('order') == 'asc') ? '&desc' : '');
+    });
+
+    sort = function (sort, order) {
+        var btn = $('.sort button[sort="' + sort + '"]');
+        if (!btn.length) btn = $('.sort button').eq(0);
+        btn.removeClass('btn-default').addClass('btn-primary').attr('order', (order == 'desc') ? order : 'asc');
+    };
+    sort(<?php echo('"'. $sort .'", "'. $order .'"'); ?>);
 
 </script>
 </body>

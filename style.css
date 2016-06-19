@@ -1,3 +1,18 @@
+div.sort {
+    border-bottom: 1px solid darkgray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+div.sort button span {
+    display: none;
+}
+div.sort button.btn-primary[order="asc"] span:first-child {
+    display: inline-block;
+}
+div.sort button.btn-primary[order="desc"] span:last-child {
+    display: inline-block;
+}
+
 div.comment {
     padding-bottom: 10px;
     border-bottom: 1px solid darkgray;
