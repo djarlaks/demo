@@ -84,7 +84,7 @@ if (isset($_GET['sort'])) {
     $order = (isset($_GET['desc'])) ? 'desc' : 'asc';
 }
 $sqlsort = ($sort == 'name' || $sort == 'email') ? $sort : 'timestamp';
-$comments = $db->query('SELECT `name`, `email`, UNIX_TIMESTAMP(`timestamp`) as "timestamp", `image`, `text` FROM `comments` ORDER BY `'. $sqlsort .'` '. $order);
+$comments = $db->query('SELECT `name`, `email`, UNIX_TIMESTAMP(`timestamp`) as "timestamp", `image`, `text`, `edited` FROM `comments` WHERE `status`=2 ORDER BY `'. $sqlsort .'` '. $order);
 if ($comments === false) $comments = [];
 
 

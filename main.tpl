@@ -30,6 +30,7 @@
         <div class="message">
             <?php echo($comment['text']); ?>
         </div>
+        <?php if ($comment['edited']) echo('<br/><em class="edited">изменен администратором</em>'); ?>
     </div>
     <?php } ?>
 </div>

@@ -1,0 +1,50 @@
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin input {
+    margin: 15px 0;
+}
+
+table.comments tr td {
+    vertical-align: middle;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 600px;
+}
+table.comments tr td:first-child {
+    text-align: center;
+}
+table.comments tr td:first-child img {
+    max-width: 60px;
+    max-height: 45px;
+}
+
+table.comments a {
+    cursor: pointer;
+}
+
+table.comments textarea {
+    width: 100%;
+    height: 100%;
+}
+
+table.comments tr td a.save,
+table.comments tr td a.cancel,
+table.comments tr.edit td a.edit,
+table.comments tr.edit td span.status,
+table.comments tr td.moderate span.status,
+table.comments tr td div.moderate {
+    display: none;
+}
+table.comments tr.edit td a.save,
+table.comments tr.edit td a.cancel,
+table.comments tr td a.edit {
+    display: inline;
+}
+
+table.comments tr td.moderate div.moderate,
+table.comments tr.edit td div.moderate {
+    display: block;
+}

@@ -40,3 +40,7 @@ div.review {
 div#view div.comment {
     border: none;
 }
+
+em.edited {
+    color: slategray;
+}
