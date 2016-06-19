@@ -1,0 +1,27 @@
+div.comment {
+    padding-bottom: 10px;
+    border-bottom: 1px solid darkgray;
+}
+div.comment span.name {
+    font-size: 16px;
+    font-weight: bold;
+}
+div.comment span.time {
+    color: dimgray;
+    font-size: 12px;
+}
+div.comment img {
+    max-width: 320px;
+    max-height: 240px;
+}
+div.comment div.message {
+    margin-top: 10px;
+}
+
+div.review {
+    margin-top: 20px;
+}
+
+div#view div.comment {
+    border: none;
+}
